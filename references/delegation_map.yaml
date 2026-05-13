@@ -1,0 +1,49 @@
+delegation_map:
+  requirement_phase:
+    owned_by: "h5-forge"
+    delegate_to: []
+    rule: "需求理解属于项目与业务语义层，不委托前端协作 skills。"
+
+  ui_parsing_phase:
+    owned_by: "h5-forge"
+    delegate_to:
+      - skill: "frontend-building-layouts"
+        when:
+          - "需要做多端响应式布局"
+          - "页面结构强依赖 CSS 布局、适配或滚动容器"
+    rule: "H5 Forge 负责页面结构拆分；布局、适配和常见溢出类子问题优先参考前端 layout skill。"
+
+  implementation_design_phase:
+    owned_by: "h5-forge"
+    delegate_to:
+      - skill: "frontend-architecting-apps"
+        when:
+          - "需要确定分层架构"
+          - "需要做架构重构"
+      - skill: "frontend-routing"
+        when:
+          - "需要新增或调整路由体系"
+      - skill: "frontend-handling-http-and-json"
+        when:
+          - "需要新增模型序列化"
+          - "需要设计 HTTP 接入方式"
+      - skill: "frontend-localizing-apps"
+        when:
+          - "页面涉及多语言接入"
+    rule: "前端 skill 提供通用蓝图；H5 Forge 负责项目内落层、命名、复用和收口。"
+
+  development_phase:
+    owned_by: "h5-forge"
+    delegate_to:
+      - skill: "frontend-testing-apps"
+        when:
+          - "新增可复用组件"
+          - "新增明显交互行为"
+          - "需要做多状态预览"
+          - "涉及关键用户流程"
+    rule: "页面开发阶段允许委托前端 skill 处理通用代码形态，但仍由 H5 Forge 统一输出结构。"
+
+  quality_phase:
+    owned_by: "h5-forge"
+    delegate_to: []
+    rule: "质量判断由 H5 Forge 主导，测试实现可参考前端 skill。"

@@ -1,0 +1,17 @@
+profile:
+  name: "zustand_feature_profile"
+  description: "适用于按 feature 分目录、页面级状态以 Zustand/Pinia/Context 风格组织的 H5/Web 项目。"
+  source: "template"
+
+  conventions:
+    directory_structure: "按 feature 分目录，每个 feature 内拆 page/components/state/models。"
+    state_management: "页面级状态优先使用 feature-local store/hook/composable，跨页面共享状态进入 shared stores。"
+    naming: "页面以 *Page.tsx / *View.vue 或项目主流命名结尾，私有组件按业务语义 + Section/Card/Item 命名。"
+    routing: "声明式路由，按 feature 语义命名。"
+
+  usage:
+    good_for:
+      - "中大型业务 H5/Web App"
+      - "页面较多且 feature 边界清晰的项目"
+    avoid_when:
+      - "项目已有完全不同的模块组织方式"

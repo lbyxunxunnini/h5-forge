@@ -1,0 +1,5 @@
+.DS_Store
+memory/runtime/current_task.yaml
+memory/runtime/*.local.yaml
+.claude/
+.h5-forge/

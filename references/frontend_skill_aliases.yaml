@@ -1,0 +1,39 @@
+frontend_skill_aliases:
+  frontend-architecting-apps:
+    aliases:
+      - web-architecture
+      - react-architecture
+      - vue-architecture
+
+  frontend-building-layouts:
+    aliases:
+      - web-layout
+      - react-layout
+      - vue-layout
+      - tailwind-layout
+
+  frontend-handling-http-and-json:
+    aliases:
+      - web-http
+      - react-query
+      - tanstack-query
+      - axios
+
+  frontend-routing:
+    aliases:
+      - react-router
+      - vue-router
+      - next-router
+
+  frontend-localizing-apps:
+    aliases:
+      - web-i18n
+      - react-i18n
+      - vue-i18n
+
+  frontend-testing-apps:
+    aliases:
+      - vitest
+      - playwright
+      - cypress
+      - testing-library

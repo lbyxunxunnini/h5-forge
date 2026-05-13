@@ -1,0 +1,21 @@
+task_runtime_memory:
+  task_name: ""
+  project_name: ""
+  task_size: "small|medium|large"
+  mode: "single|multi-role"
+
+  temporary_business_rules: []
+  field_special_cases: []
+  api_compat_notes: []
+
+  current_understanding:
+    business_goal: ""
+    ui_structure: []
+    key_constraints: []
+
+  risk_points: []
+  need_user_confirmation: []
+
+  retention_policy:
+    persist_across_sessions: false
+    should_promote_to_project_memory: false

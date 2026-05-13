@@ -1,0 +1,33 @@
+global_preferences:
+  user_profile:
+    role: "h5_frontend_engineer"
+    confidence: "medium"
+
+  page_split_preferences:
+    rule: ""
+    confidence: "low|medium|high"
+    notes: []
+
+  private_component_naming_preferences:
+    rule: ""
+    confidence: "low|medium|high"
+    notes: []
+
+  implementation_bias:
+    business_priority_first: true
+    maintainability_priority_high: true
+    ui_fidelity_as_advice: true
+
+  h5_skills_preferences:
+    reminder_suppressed: false
+    notes: []
+
+  reuse_preferences:
+    prefer_reuse_before_rewrite: true
+    allow_extract_shared_when_boundary_clear: true
+    avoid_force_extending_legacy_modules: true
+
+  update_policy:
+    project_rules_do_not_write_here: true
+    cross_project_preferences_only: true
+    require_continual_correction: true

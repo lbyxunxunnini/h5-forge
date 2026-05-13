@@ -1,0 +1,112 @@
+project_rule_card:
+  project:
+    name: "example_project"        # 项目名称，用 snake_case
+    type: "h5"                # 固定值
+    status: "legacy"               # legacy = 迭代中项目, new = 新项目
+    overall_confidence: "medium"   # 规则卡整体置信度
+
+  team_rules:
+    directory_structure:
+      rule: ""                     # 例：src/features/<module>/pages/
+      confidence: "low|medium|high"
+      evidence: []
+
+    module_boundaries:
+      rule: ""                     # 例：feature 级隔离，shared 放跨模块组件
+      confidence: "low|medium|high"
+      evidence: []
+
+    naming_conventions:
+      pages: ""                    # 例：xxx_page.js/ts, XxxPage
+      components: ""                  # 例：xxx_component.js/ts, XxxComponent
+      states: ""                   # 例：xxx_store.ts / use_xxx.ts / xxx.store.ts
+      models: ""                   # 例：xxx_model.js/ts, XxxModel
+      helpers: ""                  # 例：xxx_utils.js/ts
+      confidence: "low|medium|high"
+      evidence: []
+
+    state_management:
+      primary_pattern: ""          # 例：Redux / Pinia / Zustand / Context/Provide / MobX
+      scope_rules: ""              # 例：页面级用 feature store/hook，全局用 app/session store
+      confidence: "low|medium|high"
+      evidence: []
+
+    component_boundaries:
+      shared_component_rule: ""    # 例：跨 2+ 页面使用才放 shared
+      page_private_component_rule: "" # 例：仅本页使用的 component 放 page 目录
+      confidence: "low|medium|high"
+      evidence: []
+
+    api_integration:
+      request_layer_rule: ""       # 例：统一走 src/core/api/
+      model_mapping_rule: ""       # 例：json_serializable / freezed
+      error_handling_rule: ""      # 例：统一走 AppException，页面层 catch 后展示 SnackBar
+      confidence: "low|medium|high"
+      evidence: []
+
+    routing:
+      pattern: ""                  # 例：React Router / Vue Router / Next Router / 无集中路由
+      registration_rule: ""        # 例：新页面必须在 app_router.js/ts 注册
+      confidence: "low|medium|high"
+      evidence: []
+
+    error_handling:
+      global_handler: ""           # 例：H5/WebError.onError + runZonedGuarded
+      user_visible_pattern: ""     # 例：SnackBar / Dialog / Toast
+      page_level_rule: ""          # 例：页面级 try-catch，不吞异常
+      confidence: "low|medium|high"
+      evidence: []
+
+    testing:
+      framework: ""                # 例：h5_test + mockito / MSW/Vitest mocks
+      coverage_rule: ""            # 例：核心业务逻辑必须有单元测试
+      component_test_rule: ""         # 例：新页面必须有 component 测试
+      confidence: "low|medium|high"
+      evidence: []
+
+    performance_budget:
+      max_component_depth: 5          # 组件树最大嵌套层数
+      max_function_lines: 50       # 函数最大行数
+      list_must_virtualize_or_paginate: true  # 长列表是否必须分页、懒加载或虚拟化
+      image_cache_enabled: true    # 图片是否必须缓存
+      confidence: "low|medium|high"
+      evidence: []
+
+    i18n:
+      enabled: false               # 是否启用国际化
+      l10n_path: ""                # 例：src/l10n/
+      supported_locales: []        # 例：["zh", "en"]
+      confidence: "low|medium|high"
+      evidence: []
+
+    accessibility:
+      enabled: false               # 是否启用无障碍检查
+      min_touch_target: 48         # 最小触摸目标（逻辑像素）
+      contrast_standard: "AA"      # WCAG 对比度标准（AA / AAA）
+      screen_reader_support: false # 是否需要屏幕阅读器支持
+      confidence: "low|medium|high"
+      evidence: []
+
+  personal_preferences:
+    page_split_style:
+      rule: ""                     # 例：一个页面一个文件夹，还是按功能拆文件
+      confidence: "low|medium|high"
+
+    private_component_naming:
+      rule: ""                     # 例：_XxxBody / _XxxContent / _XxxView
+      confidence: "low|medium|high"
+
+  inferred_rules:
+    active_rules: []
+    low_confidence_rules: []
+    conflicts_to_watch: []
+
+  reuse_knowledge:
+    similar_pages: []
+    reusable_patterns: []
+    avoid_reuse_targets: []
+
+  task_only_context:
+    temporary_business_rules: []
+    field_special_cases: []
+    api_compat_notes: []

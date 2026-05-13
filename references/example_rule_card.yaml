@@ -1,0 +1,144 @@
+project_rule_card:
+  project:
+    name: "sample_h5_app"
+    type: "h5"
+    status: "legacy"
+    overall_confidence: "medium"
+
+  team_rules:
+    directory_structure:
+      rule: "业务页面按 feature 分目录，每个 feature 下再拆 page、components、state、models。"
+      confidence: "high"
+      evidence:
+        - "src/features/profile/page/"
+        - "src/features/profile/components/"
+        - "src/features/profile/state/"
+
+    module_boundaries:
+      rule: "页面私有组件保留在 feature 内，只有跨 feature 复用且边界稳定的组件才进入 shared。"
+      confidence: "medium"
+      evidence:
+        - "src/shared/components/common_button.js/ts"
+        - "src/features/order/components/order_summary_card.js/ts"
+
+    naming_conventions:
+      pages: "页面文件以 *_page.js/ts 结尾，页面类以 Page 结尾。"
+      components: "页面私有组件以业务语义命名，类名以 Component/Section/Card 结尾。"
+      states: "状态文件以 *_controller.js/ts 或 *_provider.js/ts 结尾，取决于主流状态管理模式。"
+      models: "数据模型以 *_model.js/ts 结尾。"
+      helpers: "辅助类以业务语义 + helper/util 命名。"
+      confidence: "medium"
+      evidence:
+        - "profile_page.js/ts"
+        - "profile_header_section.js/ts"
+        - "profile_controller.js/ts"
+
+    state_management:
+      primary_pattern: "Zustand/Pinia store + Context/Provide"
+      scope_rules: "页面级状态默认挂在 feature/state 或 stores 下，跨页面共享状态才进入 shared stores。"
+      confidence: "medium"
+      evidence:
+        - "src/features/profile/state/profile_controller.js/ts"
+        - "src/shared/providers/session_provider.js/ts"
+
+    component_boundaries:
+      shared_component_rule: "只有跨两个以上 feature 复用且视觉/行为稳定的组件进入 shared/components。"
+      page_private_component_rule: "只服务当前页面结构或命名强依赖当前业务语义的组件保留在 feature/components。"
+      confidence: "high"
+      evidence:
+        - "src/shared/components/common_loading_view.js/ts"
+        - "src/features/profile/components/profile_stat_card.js/ts"
+
+    api_integration:
+      request_layer_rule: "接口请求统一经 repository/data_source 发起，不在页面层直接写请求。"
+      model_mapping_rule: "接口响应先映射到 model，再由 store/hook/composable 组合成 UI 状态。"
+      error_handling_rule: "错误统一转成 Result/Failure 类后交由状态层处理。"
+      confidence: "medium"
+      evidence:
+        - "src/features/profile/data/profile_repository.js/ts"
+        - "src/core/network/failure.js/ts"
+
+    routing_and_navigation:
+      route_definition_rule: "统一在 app_router 或 前端路由 配置中声明路由，不在页面内临时拼接路由常量。"
+      route_naming_rule: "页面路由名使用 feature 语义命名，路径与页面语义保持一致。"
+      navigation_trigger_rule: "页面动作触发导航时优先通过统一 router 封装调用。"
+      confidence: "medium"
+      evidence:
+        - "src/app/router/app_router.js/ts"
+
+    localization:
+      localization_strategy: "用户可见字符串通过 l10n 生成类获取，不直接硬编码。"
+      string_management_rule: "文案 key 以 feature 语义命名。"
+      confidence: "medium"
+      evidence:
+        - "src/l10n/app_localizations.js/ts"
+
+    theming_and_styling:
+      color_source_rule: "颜色统一来自 Theme 或 design token，不直接散落硬编码。"
+      spacing_rule: "间距优先使用项目统一 spacing 常量。"
+      typography_rule: "文本样式优先从 Theme.of(context).textTheme 派生。"
+      confidence: "medium"
+      evidence:
+        - "src/core/theme/app_theme.js/ts"
+
+    performance_constraints:
+      list_rendering_rule: "长列表优先使用 builder 构造，避免一次性构建全部子项。"
+      image_loading_rule: "网络图片统一通过项目封装的缓存图片组件渲染。"
+      expensive_rerender_rule: "页面级状态变化不要导致整个长列表反复重渲染。"
+      confidence: "medium"
+      evidence:
+        - "src/shared/components/cached_network_image_view.js/ts"
+
+    dependency_injection:
+      di_strategy: "依赖通过 store / repository 注入，不在页面内直接 new 数据层对象。"
+      injection_boundary_rule: "页面层最多装配页面所需 store/hook/composable，不跨层手动拼装深层依赖。"
+      confidence: "medium"
+      evidence:
+        - "src/shared/providers/session_provider.js/ts"
+
+  personal_preferences:
+    page_split_style:
+      rule: "大页面优先按视觉区块拆成 section，小组件不要过度提前抽公共。"
+      confidence: "medium"
+
+    private_component_naming:
+      rule: "私有组件优先用业务语义 + section/card/tile 命名，避免 generic_component 之类空泛名字。"
+      confidence: "high"
+
+  inferred_rules:
+    active_rules:
+      - "feature 内优先自洽，shared 只放稳定复用项"
+      - "页面层不直接请求接口"
+      - "状态管理默认先走页面级 store/hook/composable"
+    low_confidence_rules:
+      - "部分老页面仍使用旧 store 写法，尚不能确认新状态方案是否已完全替代"
+      - "个别 feature 目录中 page 和 view 并存，可能存在历史迁移未完成"
+    conflicts_to_watch:
+      - "新页面应落在 page 还是 view 目录"
+      - "状态层统一使用 store、hook 还是 composable 命名"
+
+  reuse_knowledge:
+    similar_pages:
+      - "features/profile/page/profile_page.js/ts"
+      - "features/account/page/account_security_page.js/ts"
+    reusable_patterns:
+      - "顶部用户信息区块"
+      - "列表 + 空态 + loading + error 的标准页面骨架"
+      - "表单提交页的 footer action bar"
+    avoid_reuse_targets:
+      - "历史耦合过重的 legacy settings 页面"
+      - "直接在页面里写接口请求的旧实现"
+
+  task_only_context:
+    temporary_business_rules:
+      - "当前任务要求未开通会员用户隐藏部分卡片"
+    field_special_cases:
+      - "userLevel 字段为空时展示默认文案"
+    api_compat_notes:
+      - "旧接口仍返回 string 类型 status，新接口已切换为 int"
+
+  quality_preferences:
+    analyze_required: true
+    component_test_expectation: "when behavior changes"
+    integration_test_expectation: "for critical flows"
+    preview_expectation: "for reusable UI components"

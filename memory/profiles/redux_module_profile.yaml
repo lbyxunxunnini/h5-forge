@@ -1,0 +1,17 @@
+profile:
+  name: "redux_module_profile"
+  description: "适用于按 module 组织、业务状态以 Redux/Pinia/Zustand 风格管理的 H5/Web 项目。"
+  source: "template"
+
+  conventions:
+    directory_structure: "按 module 分目录，每个 module 内含 views/components/stores/models/api。"
+    state_management: "页面和业务状态优先通过 Redux/Pinia/Zustand 组织。"
+    naming: "状态、action、selector/getter 按项目主流状态管理习惯命名，页面命名服从 module 语义。"
+    routing: "路由集中配置，页面跳转通过统一路由层分发。"
+
+  usage:
+    good_for:
+      - "已有 Redux/Pinia/Zustand 历史沉淀的项目"
+      - "业务流程和状态流较复杂的项目"
+    avoid_when:
+      - "项目主流不是 Redux/Pinia/Zustand"

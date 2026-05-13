@@ -1,0 +1,109 @@
+project_rule_card:
+  project:
+    name: ""
+    type: "h5"
+    status: "new|legacy"
+    overall_confidence: "low|medium|high"
+    source_rules: []  # 规则卡内容来源，如 [".trae/rules/rules.md", "project scan"]
+
+  team_rules:
+    directory_structure:
+      rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    module_boundaries:
+      rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    naming_conventions:
+      pages: ""
+      components: ""
+      states: ""
+      models: ""
+      helpers: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    state_management:
+      primary_pattern: ""
+      scope_rules: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    component_boundaries:
+      shared_component_rule: ""
+      page_private_component_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    api_integration:
+      request_layer_rule: ""
+      model_mapping_rule: ""
+      error_handling_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    routing_and_navigation:
+      route_definition_rule: ""
+      route_naming_rule: ""
+      navigation_trigger_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    localization:
+      localization_strategy: ""
+      string_management_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    theming_and_styling:
+      color_source_rule: ""
+      spacing_rule: ""
+      typography_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    performance_constraints:
+      list_rendering_rule: ""
+      image_loading_rule: ""
+      expensive_rerender_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+    dependency_injection:
+      di_strategy: ""
+      injection_boundary_rule: ""
+      confidence: "low|medium|high"
+      evidence: []
+
+  personal_preferences:
+    page_split_style:
+      rule: ""
+      confidence: "low|medium|high"
+
+    private_component_naming:
+      rule: ""
+      confidence: "low|medium|high"
+
+  inferred_rules:
+    active_rules: []
+    low_confidence_rules: []
+    conflicts_to_watch: []
+
+  reuse_knowledge:
+    similar_pages: []
+    reusable_patterns: []
+    avoid_reuse_targets: []
+
+  task_only_context:
+    temporary_business_rules: []
+    field_special_cases: []
+    api_compat_notes: []
+
+  quality_preferences:
+    analyze_required: true
+    component_test_expectation: "when behavior changes"
+    integration_test_expectation: "for critical flows"
+    preview_expectation: "for reusable UI components"
