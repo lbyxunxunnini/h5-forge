@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.2
+
+架构级任务分类与运维直通重定义
+
+- 新增架构级任务分类：优化/重构/代码审查/迁移/依赖清理/i18n-a11y，角色流程为架构设计师 → 页面工程师
+- 运维直通重定义：仅覆盖排除场景（非 H5 任务），npm/eslint/CI 等工程任务改为轻量任务
+- 新增角色流程选择表：有 UI → 四角色，无 UI → 跳 UI 设计师，架构级 → 跳需求+UI，轻量 → 页面工程师
+- Description 精简为 3 行，与 flutter-forge 格式统一
+- 模式表合并：代码审查/迁移/i18n-a11y 合并为架构级任务一个模式
+- 新增高风险结构决策定义
+- 修复误路由纠正与需求阶段强制重开的触发短语冲突
+- question_budget.md 新增 LA 层级、架构设计师全程主导说明和角色流程选择表
+- code_review_mode.md、migration_assist.md 输出格式统一为 `[h5-forge] 架构设计师：`
+- i18n_a11y_check.md 加 `[h5-forge] 架构设计师：` 输出前缀
+- skill_visibility.md 加运维直通和架构级任务标记
+- README 同步更新路由图、架构图、模式表、讨论触发条件
+- 修复组件抽取标准矛盾（architecture_designer.md 对齐 engineering_heuristics.md）
+- README 绝对路径改相对路径
+
 ## 0.4.1
 
 触发机制与会话管理修复
