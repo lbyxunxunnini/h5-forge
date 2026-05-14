@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1
+
+触发机制与会话管理修复
+
+- 重写 SKILL.md frontmatter description：加入硬触发关键词（`h5f-`/`h5f -`/`h5f `）、强制调用规则、排除场景、防误判规则
+- 新建 `references/session_management.md`：子任务清单格式、精确写入时机、恢复逻辑
+- `skill_visibility.md` 会话状态段落改为引用 session_management.md
+- `load_map.md` 新增 session_management.md 条目
+
 ## 0.4.0
 
 统一四角色提问预算与确认门禁

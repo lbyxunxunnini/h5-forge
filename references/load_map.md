@@ -76,6 +76,7 @@
 ### 需要可见性标记或会话状态规则
 
 - [skill_visibility.md](skill_visibility.md)
+- [session_management.md](session_management.md)
 
 ### 需要启动握手输出格式
 
