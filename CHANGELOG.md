@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0
+
+统一四角色提问预算与确认门禁
+
+- 新增 `references/shared_workflow_gates/question_budget.md`，把 `L1-L4` 提问预算从主规则中拆出
+- `SKILL.md` 新增四角色提问预算摘要，明确完整流程不等于问题越多越好
+- `requirement_confirmation.md`、`role_gate_matrix.md` 补充预算和放行规则
+- 需求分析师与 UI 设计师角色卡补充预算说明，强调“问到够用就停”
+- 修正 README 中错误的 `3.0.0` 展示，统一 `VERSION`、`.skillhub.json` 和 README 版本号到 `0.4.0`
+
 ## 0.3.0
 
 0.3.0 是一次面向”工作流产品化”的大版本升级，重点把新项目共创、规则卡初始化、项目阶段判断和共享门禁整理成更稳定的整体系统，并对主入口文档做了第一轮瘦身。

@@ -4,7 +4,7 @@
 
 H5 Forge 是一个为 H5/Web 开发提供结构化的 AI 协作工作流 skill。它不是代码生成器——它是一个**项目内编排与决策层**，在动手写代码之前先理解项目上下文、收口设计方案、统一工程规则。
 
-GitHub: [lbyxunxunnini/h5-forge](https://github.com/lbyxunxunnini/h5-forge) · License: MIT · 当前版本：3.0.0
+GitHub: [lbyxunxunnini/h5-forge](https://github.com/lbyxunxunnini/h5-forge) · License: MIT · 当前版本：0.4.0
 
 ## 30 秒理解
 
@@ -512,4 +512,4 @@ scripts/discover_h5_skills.sh
 
 ## 版本
 
-当前版本：**3.0.0** · [CHANGELOG](CHANGELOG.md)
+当前版本：**0.4.0** · [CHANGELOG](CHANGELOG.md)
