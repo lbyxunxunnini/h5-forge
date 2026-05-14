@@ -37,6 +37,11 @@
 2. 结构化规则卡
 3. 高风险确认项
 
+如果存在高风险确认项，输出不应只是罗列问题，还应包含：
+
+4. 默认建议
+5. 建议原因
+
 ## 必读配套文件
 
 - `references/rule_card_template.yaml`
@@ -51,3 +56,21 @@
 
 - `references/quality_gates.md` 中的 `after_requirement`
 - `references/quality_gates.md` 中的 `after_implementation`
+
+## 老项目顾问式提问
+
+当扫描结论无法直接落地时，H5 Forge 要像顾问一样工作，而不是像 lint 报告一样堆问题：
+
+- 先说明你看到的主流模式
+- 再说明为什么建议跟这套模式
+- 最后只提最关键的确认项
+
+尤其是以下场景：
+
+- 状态管理并存
+- 路由入口分散
+- 共享组件边界模糊
+- 网络层 client / service / repository 混用
+- 规则文件与代码不一致
+
+没有足够理由时，不要把“需要你确认”当成默认出口。

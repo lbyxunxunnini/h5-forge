@@ -13,6 +13,8 @@
 - `routing_and_recovery.md`
 - `requirement_confirmation.md`
 - `role_gate_matrix.md`
+- `advisor_collaboration.md`
+- `legacy_project_consulting.md`
 
 使用原则：
 
