@@ -4,7 +4,7 @@
 
 H5 Forge 是一个为 H5/Web 开发提供结构化的 AI 协作工作流 skill。它不是代码生成器——它是一个**项目内编排与决策层**，在动手写代码之前先理解项目上下文、收口设计方案、统一工程规则。
 
-GitHub: [lbyxunxunnini/h5-forge](https://github.com/lbyxunxunnini/h5-forge) · License: MIT · 当前版本：0.2.2
+GitHub: [lbyxunxunnini/h5-forge](https://github.com/lbyxunxunnini/h5-forge) · License: MIT · 当前版本：0.2.3
 
 ## 30 秒理解
 
@@ -230,6 +230,8 @@ H5 Forge 不会对所有任务都展开四角色流程：
 - **安静模式**：改文案、颜色、字号、已定位 bug 等轻量任务，直接由页面工程师处理，只输出必要的 `[h5-forge]` 标记。
 - **完整模式**：新页面、模块扩展、复用判断、状态管理接入、PRD/设计图解析、代码审查和迁移任务，会进入结构化流程。
 - **新项目共创模式**：只有一个初步想法时，先进行需求、风格、结构的多轮共创，再进入初始化或代码阶段。
+- **确认绑定摘要**：用户一句“确认 / 可以 / 按这个来”只会确认当前摘要里的条目，不会自动吞掉摘要外的未决项。
+- **UI 结构草案闸门**：UI 在新项目模式下先给结构草案，用户确认后才展开完整页面结构包。
 
 这保证日常小改动不被流程拖慢，大需求又不会跳过设计收口。
 
@@ -530,4 +532,4 @@ scripts/discover_h5_skills.sh
 
 ## 版本
 
-当前版本：**0.2.2** · [CHANGELOG](CHANGELOG.md)
+当前版本：**0.2.3** · [CHANGELOG](CHANGELOG.md)
