@@ -18,6 +18,8 @@
 
 如果用户是在从 0 到 1 创建新应用，先根据 [new_project_app_profiles.md](new_project_app_profiles.md) 选择 `mvp`、`business` 或 `team` profile，再决定规则来源。
 
+如果用户当前还停留在“我有个想法，想做一个项目”的阶段，不要立刻进入规则卡填写。先进入 [new_project_cocreation_mode.md](new_project_cocreation_mode.md)，完成想法收口、需求补全、风格共创和页面结构确认，再回到规则初始化。
+
 ### 选项 A：从已有规则复制
 
 1. 先列出可选模板与历史规则卡
@@ -103,6 +105,7 @@
 ### 4. 新项目 + 无规则卡
 
 - 默认进入新项目初始化模式
+- 如果当前还是想法阶段，先进入新项目共创模式，再回到初始化
 - 给出三种起步方式：
   - 使用当前扫描结果
   - 使用通用 H5/Web 规则 + 全局偏好

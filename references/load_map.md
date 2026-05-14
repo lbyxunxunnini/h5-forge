@@ -16,6 +16,7 @@
 
 - [new_project_app_profiles.md](new_project_app_profiles.md)
 - [new_project_profile_selection.md](new_project_profile_selection.md)
+- [new_project_cocreation_mode.md](new_project_cocreation_mode.md)
 - [project_init_flow.md](project_init_flow.md)
 - [rule_card_template.yaml](rule_card_template.yaml)
 
