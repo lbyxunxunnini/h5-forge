@@ -112,7 +112,7 @@
 - 不复用 product_detail 的布局（业务差异太大）
 
 ## 规则卡路径
-- ~/.h5-forge/projects/xxx.rule_card.yaml
+- .h5-forge/projects/<project>.rule_card.yaml
 ```
 
 如果“是否允许进入页面工程师 = 否”，禁止把交接内容继续下发给页面工程师，只能回到用户确认落地方案。

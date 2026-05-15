@@ -96,6 +96,8 @@
 - 读取 package.json 获取依赖（推断状态管理、路由、网络库）
 - 扫描 src/ 目录结构（推断目录组织方式）
 - 读取已有代码风格（推断命名约定）
+- 可先运行 `scripts/project_snapshot.py /path/to/app` 生成冷启动摘要
+- 可运行 `scripts/init_rule_card.py /path/to/app --interactive` 生成规则卡草案
 
 ### 引导用户回答 5 个必填项
 
@@ -112,6 +114,7 @@
 - API 接入：统一走 src/core/api/，json_serializable 映射
 - 测试：h5_test + MSW/Vitest mocks，新页面需 component 测试
 - 个人偏好：按项目主流风格
+- `quick_context`：写入最近一次扫描摘要，避免每次任务重复全量扫描
 
 填充后输出规则卡草案，让用户确认或修改。确认后写入正式规则卡。
 
@@ -160,7 +163,7 @@
 - 一旦完成起步方式选择，并且已经产出首个设计包，就必须先生成当前项目规则卡，再进入代码阶段
 - 生成后应显式输出：
   - `- 规则卡：已生成`
-  - `- 规则卡路径：~/.h5-forge/projects/<project>.rule_card.yaml`
+  - `- 规则卡路径：.h5-forge/projects/<project>.rule_card.yaml`
   - `- 项目状态：已初始化`
 
 如果当前任务很小、当前模块非常清晰，允许直接执行，但要用一行提示说明你跳过了完整初始化。

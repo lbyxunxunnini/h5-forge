@@ -1,0 +1,17 @@
+profile:
+  name: "react_query_profile"
+  description: "适用于 React + TanStack Query/SWR 的 H5/Web 项目。"
+  source: "template"
+
+  conventions:
+    directory_structure: "src/features/<feature>/{pages,components,queries,models}"
+    state_management: "服务端状态进入 query hooks；客户端临时状态优先组件本地化。"
+    naming: "query hook 使用 useXxxQuery/useXxxMutation，DTO/schema 跟随项目主流。"
+    routing: "路由按 React Router/Next Router 项目主流接入。"
+
+  usage:
+    good_for:
+      - "接口驱动、缓存和请求状态较多的 H5 应用"
+      - "React Query/SWR 已经是主流数据层的项目"
+    avoid_when:
+      - "业务状态主要由 Redux/Zustand 管理"

@@ -1,5 +1,27 @@
 # Changelog
 
+说明：
+
+- `v0.1.0` 开启 v 前缀发布线，用于和历史无 `v` 的 `0.x.x` 版本隔离
+- `0.4.x` 及更早版本保留为历史事实；当前现行入口、规则卡路径和发布检查以 `v0.1.0` 后的文档为准
+
+## v0.1.0
+
+全新 v 前缀发布线，复刻 Flutter Forge 新方案到 H5/Web 技术栈，并补齐规则卡项目隔离。
+
+- 新增 `h5f-fast` 快速入口：轻量优先、冷启动扫描摘要、明确风险才升级
+- 新增 `h5f-a` 全自动入口：普通缺口采用推荐方案和 `auto_assumption` 继续推进，高风险才中断确认
+- 新增 H5 技术栈扫描：识别 React/Vue/Next/Nuxt/Vite、状态管理、路由、网络层、样式、测试和组件库信号
+- 新增 `scripts/project_snapshot.py`、`scripts/init_rule_card.py`、`scripts/doctor.sh`、`scripts/validate_project.sh`
+- 新增规则卡校验、路由 golden 测试、文档同步检查和 H5 技术栈扫描测试
+- 新增 QUICKSTART、CHEATSHEET、fast/autonomous mode、stack profiles、release playbook、demo transcript 和 mode test cases
+- README 顶部入口调整为 `h5f-` / `h5f-fast` / `h5f-a` 三个核心入口
+- 规则卡正式来源限定为当前目标项目目录内 `<project>.rule_card.yaml` 精确命中
+- 禁止读取 `~/.claude/projects/.../memory/*.yaml`、其它项目目录或其它项目名的规则卡作为兜底
+- 无规则卡时生成 `.h5-forge/projects/<project>.rule_card_draft.yaml` 草案
+- 新增 `scripts/validate_rule_card_resolution.py` 并纳入 `validate_release.sh`
+- 版本元数据统一到 `v0.1.0`
+
 ## 0.4.2
 
 架构级任务分类与运维直通重定义

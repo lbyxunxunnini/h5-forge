@@ -1,5 +1,5 @@
 {
   "name": "h5-forge",
-  "description": "H5/Web 项目开发的主控 skill。当前工作区是 H5/Web 项目时，除纯知识问答、闲聊确认、通用 git 操作等硬排除场景外，H5/Web 页面、模块、PRD/设计图、目录命名、复用判断、状态管理、项目初始化、测试、构建、配置和质量检查任务都应优先进入 h5-forge，再按复杂度选择直通、轻量或完整流程。",
-  "version": "0.4.2"
+  "description": "H5/Web 项目开发主控 skill。显式触发 h5f-、h5f-fast、h5f-a 或要求按 H5/Web 结构化流程处理时进入；controller 会自动分流直通、轻量、快速、全自动、架构级、页面开发和新项目共创。",
+  "version": "v0.1.0"
 }

@@ -39,14 +39,15 @@ project_rule_card:
 
     api_integration:
       request_layer_rule: ""       # 例：统一走 src/core/api/
-      model_mapping_rule: ""       # 例：json_serializable / freezed
-      error_handling_rule: ""      # 例：统一走 AppException，页面层 catch 后展示 SnackBar
+      model_mapping_rule: ""       # 例：DTO/Schema/Zod/TypeScript interface
+      error_handling_rule: ""      # 例：统一走 ApiError，页面层 catch 后展示 Toast
       confidence: "low|medium|high"
       evidence: []
 
-    routing:
-      pattern: ""                  # 例：React Router / Vue Router / Next Router / 无集中路由
-      registration_rule: ""        # 例：新页面必须在 app_router.js/ts 注册
+    routing_and_navigation:
+      route_definition_rule: ""    # 例：React Router / Vue Router / Next Router / 无集中路由
+      route_naming_rule: ""        # 例：新页面必须按 feature 语义命名
+      navigation_trigger_rule: ""  # 例：通过统一路由 helper 或 Link 触发
       confidence: "low|medium|high"
       evidence: []
 
@@ -110,3 +111,13 @@ project_rule_card:
     temporary_business_rules: []
     field_special_cases: []
     api_compat_notes: []
+
+  quick_context:
+    snapshot_generated_by: ""
+    recommended_profile: ""
+    profile_reason: ""
+    src_top_dirs: []
+    routing_entries: []
+    state_entries: []
+    network_entries: []
+    test_entries: []

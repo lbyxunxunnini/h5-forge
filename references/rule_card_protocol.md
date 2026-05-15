@@ -4,16 +4,31 @@
 
 ## 规则卡路径
 
-默认真实记忆目录：`${H5_FORGE_HOME:-~/.h5-forge}`
+项目规则卡只能来自**当前目标项目根目录内部**。按以下顺序查找，且只匹配当前项目名：
 
-项目规则卡位置：`${H5_FORGE_HOME:-~/.h5-forge}/projects/*.rule_card.yaml`
+1. `.claude/.h5-forge/projects/<project>.rule_card.yaml`
+2. `.trae/.h5-forge/projects/<project>.rule_card.yaml`
+3. `.agent/.h5-forge/projects/<project>.rule_card.yaml`
+4. `.h5-forge/projects/<project>.rule_card.yaml`
 
-这是 **唯一正式规则卡来源**。
+查找规则：
+
+- 优先检查 `.claude/.h5-forge`
+- 其次检查 `.trae/.h5-forge`
+- 再检查 `.agent/.h5-forge`
+- 如果前三个目录都不存在或都没有当前项目规则卡，则回退到项目根目录下的 `.h5-forge`
+- 通配符只能用于列目录展示，不能用于加载正式规则卡；正式加载必须是 `<project>.rule_card.yaml` 精确命中
+- 当需要初始化规则卡且以上目录都不存在或没有精确命中时，在当前项目中创建 `.h5-forge/projects/<project>.rule_card_draft.yaml`
+
+这是 **唯一正式规则卡来源范围**。
 
 以下内容都不应视为正式规则卡来源：
 
 - `.claude/projects/.../memory/*.yaml`
+- `~/.claude/projects/.../memory/*.yaml`
 - 其他宿主自己的项目记忆目录
+- 任何不在当前目标项目根目录下的规则卡，即使命名看起来匹配
+- 当前项目目录下其他项目名的 `*.rule_card.yaml`
 - 仓库内示例规则卡或模板文件
 - 当前会话临时总结或扫描推断
 
@@ -36,8 +51,23 @@
 - 一律视为 `项目状态：未初始化`
 - 不要把扫描推断、代码印象或会话记忆误报成"已加载规则卡"
 - 应显式标注 `当前判断来源：项目扫描 / 当前代码结构 / 会话上下文`
+- 立即进入当前项目规则卡草案生成：`scripts/init_rule_card.py <project_root> --interactive`
+- 输出草案路径时必须是当前项目内路径：`.h5-forge/projects/<project>.rule_card_draft.yaml`
 
-即使其他宿主目录中存在项目记忆文件，也不能据此输出"已加载规则卡"。
+即使其他宿主目录或 Claude 全局项目记忆中存在项目记忆文件，只要不在当前目标项目根目录的上述查找顺序内，也不能据此输出"已加载规则卡"。
+
+## 错误恢复规则
+
+如果已经误读了其他项目规则卡，必须立刻纠正：
+
+```text
+[h5-forge] 规则卡读取纠正：刚才误用了非当前项目目录下的规则卡，已废弃该上下文。
+- 当前项目：<project_root>
+- 规则卡：未发现，准备初始化
+- 下一步：扫描当前项目并生成规则卡草案
+```
+
+纠正后不得继续引用误读规则卡中的目录、mixin、状态管理、路由、组件或 API 约定。
 
 ## 已有项目规则发现
 
@@ -64,6 +94,18 @@
 5. 然后判断是否需要补扫描
 
 只有在规则卡存在且 前端协作 skills 状态也已就绪时，才允许静默进入下一环节。
+
+## 规则卡草案与 quick_context
+
+`scripts/init_rule_card.py` 生成的是草案，不是正式规则卡。草案默认写入：
+
+```text
+<project>/.h5-forge/projects/<project>.rule_card_draft.yaml
+```
+
+草案通过人工确认或全自动策略确认后，才可提升为正式规则卡。
+
+`quick_context` 用于缓存最近一次扫描摘要，字段包括目录顶层、路由入口、状态入口、网络入口、测试入口和技术栈信号。controller 可优先读取 `quick_context`，只有发现信息过期或任务涉及结构风险时才重新全量扫描。
 
 ## 规则卡自动更新
 

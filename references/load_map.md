@@ -7,10 +7,12 @@
 ### 迭代中项目首次接入
 
 - [existing_project_entry.md](existing_project_entry.md)
-- [legacy_project_scan.md](legacy_project_scan.md)
+- [existing_project_scan.md](existing_project_scan.md)
 - [rule_card_template.yaml](rule_card_template.yaml)
 - [example_rule_card.yaml](example_rule_card.yaml)
 - [existing_rules_discovery.md](existing_rules_discovery.md)
+- [h5_stack_detection.md](h5_stack_detection.md)
+- [stack_profiles.md](stack_profiles.md)
 
 ### 新 H5/Web 应用从 0 到 1
 
@@ -27,6 +29,8 @@
 ### 进入具体任务执行
 
 - [task_runtime_prompt.md](task_runtime_prompt.md)
+- [fast_mode.md](fast_mode.md)
+- [autonomous_mode.md](autonomous_mode.md)
 
 ### 需要记忆读写规则
 
@@ -106,4 +110,12 @@
 
 - [case_studies.md](case_studies.md)
 - [case_study_member_center.md](case_study_member_center.md)
+- [case_study_large_rework.md](case_study_large_rework.md)
 - [validation_log.md](validation_log.md)
+- [demo_transcript.md](demo_transcript.md)
+- [mode_test_cases.md](mode_test_cases.md)
+
+### 需要发布与产品化检查
+
+- [release_playbook.md](release_playbook.md)
+- [rule_card_validation.md](rule_card_validation.md)

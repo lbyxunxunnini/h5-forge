@@ -13,8 +13,40 @@
 当前暂无公开真实案例。后续补充时按时间倒序记录：
 
 ```text
+- 2026-05-15 h5-forge / 规则卡项目隔离回归 / 已限定为当前项目目录精确命中，禁止读取 Claude 全局 memory
 - YYYY-MM-DD 项目代号 / 任务类型 / 结论一句话
 ```
+
+## 真实回归案例
+
+### 案例 1：规则卡项目隔离回归
+
+### 基本信息
+
+- 日期：2026-05-15
+- 项目：h5-forge（skill 文档工程）
+- 任务类型：规则卡协议回归
+- 输入类型：从 flutter-forge 同步修复
+- 使用工具：Codex
+- H5 Forge 版本：v0.1.0+
+- 是否启用规则卡：否
+- 是否命中前端协作 skills：否
+- 用户是否能明显感知到当前模式 / 阶段切换：能
+
+### 问题
+
+规则卡协议仍保留 `~/.h5-forge/projects/*.rule_card.yaml` 全局来源口径，容易和宿主全局项目记忆混淆。
+
+### 修复
+
+- 规则卡正式来源限定为当前目标项目目录内 `<project>.rule_card.yaml` 精确命中
+- 当前项目没有精确命中时，必须输出 `规则卡：未发现，准备初始化`
+- 初始化路径固定为当前项目 `.h5-forge/projects/<project>.rule_card_draft.yaml`
+- 新增 `scripts/validate_rule_card_resolution.py` 覆盖全局 Claude memory、当前目录其它项目卡、当前项目精确卡三种情况
+
+### 结论
+
+H5 Forge 与 Flutter Forge 保持一致：规则卡必须项目内隔离，不能跨项目兜底。
 
 ## 单次记录模板
 

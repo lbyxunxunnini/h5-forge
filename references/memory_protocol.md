@@ -26,14 +26,7 @@ skill 仓库内的 `memory/` 目录应视为：
 
 真实用户记忆不应默认写回 skill 仓库目录。
 
-默认真实存储目录建议为：
-
-- `${H5_FORGE_HOME:-~/.h5-forge}`
-
-也就是说：
-
-- 仓库内 `memory/` = seed / example
-- 仓库外 `~/.h5-forge/` = persisted user state
+默认真实项目规则卡存储在当前目标项目目录内。仓库内 `memory/` 只作为 seed / example，不作为用户项目规则卡来源。
 
 ## 记忆分层
 
@@ -68,14 +61,19 @@ skill 仓库内的 `memory/` 目录应视为：
 
 文件：
 
-- `${H5_FORGE_HOME:-~/.h5-forge}/projects/<project_name>.rule_card.yaml`
+- 当前目标项目内 `.claude/.h5-forge/projects/<project>.rule_card.yaml`
+- 当前目标项目内 `.trae/.h5-forge/projects/<project>.rule_card.yaml`
+- 当前目标项目内 `.agent/.h5-forge/projects/<project>.rule_card.yaml`
+- 当前目标项目内 `.h5-forge/projects/<project>.rule_card.yaml`
 
-这是唯一正式项目规则卡路径。
+这是唯一正式项目规则卡来源范围，且必须精确匹配当前项目名。
 
 以下内容不计入正式规则卡：
 
 - `.claude/projects/.../memory/*.yaml`
+- `~/.claude/projects/.../memory/*.yaml`
 - 其他宿主自己的项目记忆文件
+- 当前项目目录下其他项目名的 `*.rule_card.yaml`
 - 仓库内 `memory/projects/*.rule_card.yaml` 示例文件
 - `references/example_rule_card.yaml`
 
@@ -175,8 +173,10 @@ skill 仓库内的 `memory/` 目录应视为：
 - 不要把扫描推断、当前代码印象或会话短期记忆误报成规则卡内容
 - 一律视为项目未初始化
 - 不要把 Claude 或其他宿主的项目记忆文件当成正式规则卡
+- 不要读取其他项目规则卡兜底
 - 应输出：
   - `规则卡：未发现，准备初始化`
+  - `规则卡草案路径：.h5-forge/projects/<project>.rule_card_draft.yaml`
   - `项目状态：未初始化`
   - `当前判断来源：项目扫描 / 当前代码结构 / 会话上下文`
 
@@ -202,7 +202,7 @@ skill 仓库内的 `memory/` 目录应视为：
 
 1. 读 `global_preferences.yaml`
 2. 扫描当前项目已有结构和依赖
-3. 读取外部 `projects/*.rule_card.yaml` 和仓库内 / 外部 `profiles/*.yaml` 作为候选来源
+3. 读取仓库内 / 外部 `profiles/*.yaml` 作为候选来源；历史项目规则卡只能作为用户明确选择的复制模板，不能自动当作当前项目规则卡
 4. 由用户选择：
    - 复制已有项目规则卡作为初始模板
    - 使用当前项目扫描结果
@@ -220,7 +220,7 @@ skill 仓库内的 `memory/` 目录应视为：
 此时应显式输出：
 
 - `规则卡：已生成`
-- `规则卡路径：~/.h5-forge/projects/<project>.rule_card.yaml`
+- `规则卡路径：.h5-forge/projects/<project>.rule_card.yaml`
 - `项目状态：已初始化`
 
 不要出现“设计包已确认、开始写代码了，但规则卡还没生成”的状态。
@@ -246,7 +246,7 @@ skill 仓库内的 `memory/` 目录应视为：
 - 多个任务中重复出现相同个人习惯
 - 该偏好不依赖某个具体项目
 
-### 写 `projects/*.rule_card.yaml`
+### 写当前项目 `<project>.rule_card.yaml`
 
 在以下情况写入或更新：
 

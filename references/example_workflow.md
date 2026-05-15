@@ -60,9 +60,7 @@
 4. 有没有可协作的 前端协作 skills
 5. 接下来会进入哪条分流
 
-这里的“规则卡”只指：
-
-- `${H5_FORGE_HOME:-~/.h5-forge}/projects/*.rule_card.yaml`
+这里的“规则卡”只指当前目标项目目录内精确命中的 `<project>.rule_card.yaml`。
 
 不包括 Claude 或其他宿主自己的项目记忆文件。
 
@@ -70,7 +68,7 @@
 
 ```text
 - 规则卡：已生成
-- 规则卡路径：~/.h5-forge/projects/<project>.rule_card.yaml
+- 规则卡路径：.h5-forge/projects/<project>.rule_card.yaml
 - 项目状态：已初始化
 ```
 

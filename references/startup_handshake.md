@@ -41,9 +41,10 @@
    - `- 项目类型：新项目`
 2. 规则卡状态
    - `- 规则卡：已加载`
-   - `- 规则卡路径：~/.h5-forge/projects/<project>.rule_card.yaml`
+   - `- 规则卡路径：.h5-forge/projects/<project>.rule_card.yaml`
    - `- 项目状态：已初始化`
    - `- 规则卡：未发现，准备初始化`
+   - `- 规则卡草案路径：.h5-forge/projects/<project>.rule_card_draft.yaml`
    - `- 项目状态：未初始化`
    - `- 当前判断来源：项目扫描 / 当前代码结构 / 会话上下文`
 3. 前端协作 skills 协作能力
@@ -59,6 +60,15 @@
 - `- 当前模式：新项目初始化`
 - `- 当前模式：直接进入当前任务`
 - `- 当前模式：需求理解 -> 设计包`
+
+规则卡路径只能在当前目标项目根目录内精确解析：
+
+1. `.claude/.h5-forge/projects/<project>.rule_card.yaml`
+2. `.trae/.h5-forge/projects/<project>.rule_card.yaml`
+3. `.agent/.h5-forge/projects/<project>.rule_card.yaml`
+4. `.h5-forge/projects/<project>.rule_card.yaml`
+
+禁止把 `~/.claude/projects/.../memory/*.yaml`、其他项目目录中的规则卡、当前项目目录下其他项目名的规则卡当作已加载规则卡。
 
 ## 进入工作阶段日志
 

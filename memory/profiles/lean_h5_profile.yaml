@@ -1,0 +1,17 @@
+profile:
+  name: "lean_h5_profile"
+  description: "适用于尚未形成明确技术栈规则的轻量 H5/Web 项目。"
+  source: "template"
+
+  conventions:
+    directory_structure: "src/pages, src/components, src/api, src/stores"
+    state_management: "先使用简单本地状态或轻量 store，复杂度上来再迁移 feature-first。"
+    naming: "先跟随脚手架和现有文件命名，避免提前发明大型规范。"
+    routing: "按项目现有路由方式接入，不主动引入新路由库。"
+
+  usage:
+    good_for:
+      - "MVP、活动页、短生命周期页面"
+      - "技术栈尚未稳定的新项目"
+    avoid_when:
+      - "已有明确团队规范或大型模块边界"

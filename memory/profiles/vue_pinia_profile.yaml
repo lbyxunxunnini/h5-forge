@@ -1,0 +1,17 @@
+profile:
+  name: "vue_pinia_profile"
+  description: "适用于 Vue + Pinia 的 H5/Web 项目。"
+  source: "template"
+
+  conventions:
+    directory_structure: "src/features/<feature>/{pages,components,stores,composables,api}"
+    state_management: "业务状态优先放 feature-local Pinia store，全局状态只放 session/app 级 store。"
+    naming: "页面使用 *Page.vue 或项目主流命名，composable 使用 useXxx。"
+    routing: "Vue Router 集中注册，新页面按 feature 语义命名。"
+
+  usage:
+    good_for:
+      - "Vue 3 + Pinia 项目"
+      - "页面和业务状态需要按 feature 管理的 H5 应用"
+    avoid_when:
+      - "项目主流不是 Vue/Pinia"

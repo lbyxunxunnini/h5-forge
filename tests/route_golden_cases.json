@@ -1,0 +1,32 @@
+[
+  {
+    "name": "fast_light_task",
+    "prompt": "h5f-fast 把登录页按钮颜色改成主题色",
+    "expected_mode": "轻量任务",
+    "expected_policy": "快速"
+  },
+  {
+    "name": "autonomous_page_development",
+    "prompt": "h5f-a 做一个会员中心页面，缺少的按推荐方案自动推进",
+    "expected_mode": "页面开发",
+    "expected_policy": "全自动"
+  },
+  {
+    "name": "architecture_review",
+    "prompt": "h5f- review 这个模块的状态管理和依赖清理",
+    "expected_mode": "架构级任务",
+    "expected_policy": "标准"
+  },
+  {
+    "name": "new_project_cocreation",
+    "prompt": "我有个新的 H5 项目想法，先共创需求和页面结构",
+    "expected_mode": "新项目共创",
+    "expected_policy": "标准"
+  },
+  {
+    "name": "medium_filter_change",
+    "prompt": "h5f- 在订单列表增加筛选，先看相似实现",
+    "expected_mode": "中等任务",
+    "expected_policy": "标准"
+  }
+]

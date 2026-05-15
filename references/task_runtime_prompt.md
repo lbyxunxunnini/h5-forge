@@ -57,7 +57,9 @@
    - 如果未发现，应同时给出：
      - `- 项目状态：未初始化`
      - `- 当前判断来源：项目扫描 / 当前代码结构 / 会话上下文`
-   - 只认 `${H5_FORGE_HOME:-~/.h5-forge}/projects/*.rule_card.yaml` 为正式规则卡
+     - `- 规则卡草案路径：.h5-forge/projects/<project>.rule_card_draft.yaml`
+   - 只认当前目标项目目录内精确命中的 `<project>.rule_card.yaml` 为正式规则卡
+   - 禁止读取 `~/.claude/projects/.../memory/*.yaml`、其他项目目录或其他项目名的规则卡
 3. `- 前端协作 skills：当前会话可见 / 已检测到本地协作技能目录 / 未检测到，将使用内置流程`
    - 同时给出：`- 前端协作 skills 状态：已就绪 / 未就绪`
 
@@ -229,7 +231,7 @@
 那么在开始写代码前，必须先输出：
 
 - `规则卡：已生成`
-- `规则卡路径：~/.h5-forge/projects/<project>.rule_card.yaml`
+- `规则卡路径：.h5-forge/projects/<project>.rule_card.yaml`
 - `项目状态：已初始化`
 
 然后才能进入代码阶段。
