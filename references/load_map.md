@@ -119,3 +119,49 @@
 
 - [release_playbook.md](release_playbook.md)
 - [rule_card_validation.md](rule_card_validation.md)
+
+## 反向索引：每个参考文件被哪些上层文件引用
+
+维护时用此表检查引用完整性。新增 reference 文件时同步更新此表。
+
+| 参考文件 | 被引用方 |
+|---------|---------|
+| task_runtime_prompt.md | SKILL.md（执行协议）、load_map.md |
+| fast_mode.md | SKILL.md（h5f-fast）、load_map.md |
+| autonomous_mode.md | SKILL.md（h5f-a）、load_map.md |
+| decision_and_question_protocol.md | task_runtime_prompt.md、skill_visibility.md、load_map.md |
+| skill_visibility.md | SKILL.md（输出日志）、load_map.md |
+| session_management.md | SKILL.md（上下文恢复）、load_map.md |
+| startup_handshake.md | SKILL.md（启动判定）、load_map.md |
+| rule_card_protocol.md | SKILL.md（规则卡检查）、load_map.md |
+| rule_card_validation.md | load_map.md |
+| project_init_flow.md | SKILL.md（项目初始化）、load_map.md |
+| memory_protocol.md | SKILL.md（记忆机制）、load_map.md |
+| engineering_heuristics.md | load_map.md |
+| h5_stack_detection.md | load_map.md |
+| stack_profiles.md | load_map.md |
+| frontend_skills.md | SKILL.md（前端协作 skills）、load_map.md |
+| delegation_map.yaml | load_map.md |
+| host_subagent_support.md | SKILL.md（并行协议）、load_map.md |
+| similar_implementation_search.md | SKILL.md（相似实现）、load_map.md |
+| input_incomplete_handling.md | load_map.md |
+| network_and_api.md | load_map.md |
+| routing_and_navigation.md | load_map.md |
+| testing_strategy.md | task_runtime_prompt.md、load_map.md |
+| quality_gates.md | task_runtime_prompt.md、load_map.md |
+| build_and_quality.md | load_map.md |
+| anti_patterns.md | load_map.md |
+| templates_catalog.md | load_map.md |
+| debugging_playbook.md | load_map.md |
+| adr_format.md | load_map.md |
+| role_handoff_formats.md | load_map.md |
+| code_review_mode.md | load_map.md |
+| migration_assist.md | load_map.md |
+| i18n_a11y_check.md | load_map.md |
+| release_playbook.md | load_map.md |
+| case_studies.md | load_map.md |
+| case_study_member_center.md | load_map.md |
+| case_study_large_rework.md | load_map.md |
+| mode_test_cases.md | load_map.md |
+| demo_transcript.md | load_map.md |
+| validation_log.md | load_map.md |

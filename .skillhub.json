@@ -1,5 +1,5 @@
 {
   "name": "h5-forge",
   "description": "H5/Web 项目开发主控 skill。显式触发 h5f-、h5f-fast、h5f-a 或要求按 H5/Web 结构化流程处理时进入；controller 会自动分流直通、轻量、快速、全自动、架构级、页面开发和新项目共创。",
-  "version": "v0.1.0"
+  "version": "0.1.1"
 }

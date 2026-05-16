@@ -5,6 +5,39 @@
 - `v0.1.0` 开启 v 前缀发布线，用于和历史无 `v` 的 `0.x.x` 版本隔离
 - `0.4.x` 及更早版本保留为历史事实；当前现行入口、规则卡路径和发布检查以 `v0.1.0` 后的文档为准
 
+## v0.1.1
+
+对齐 Flutter Forge v0.1.3 的成熟机制，补齐参考文档、脚本和协议。
+
+- 修复 "h5f a" 触发词不一致：SKILL.md 触发条件补充 "h5f a"，classify_task.sh 正则修复 `h5f a` 不匹配问题
+- 新增 `references/decision_and_question_protocol.md`：决策域、一问一答、阶段门禁、摘要包协议、前置阶段并发边界
+- 修复路由顺序重复维护：SKILL.md 路由改为 12 步单一权威定义
+- 修复脚本失败回退缺失：check_rule_card.sh 和 classify_task.sh 脚本不存在或执行失败时补充降级路径
+- 修复 h5f-fast 升级后日志限额冲突：明确升级日志不计入轻量任务 2 条限额
+- 优化 Session 恢复判定：增加强匹配/弱匹配/反向排除三级判定规则
+- 补充"等待态"行为约束：上下文保持、恢复方式、超时处理
+- 新增 S6 完成阶段定义：收口状态 + 完成日志 + 规则卡出口 + 退出
+- 新增 h5f-fast vs h5f-a 快速对比表
+- 新增升级信号判定标准表（需求缺口/UI结构决策/架构边界风险）
+- 新增降级条件定义
+- 新增用户中途打断/取消协议
+- 新增 C3 冻结输出要求（目标与场景/结构方向/工程组织/首批范围）
+- 新增 S0 退出条件定义
+- 新增 `references/host_subagent_support.md`：宿主子代理并行支持协议与串行降级
+- 补齐 `references/fast_mode.md`：从 28 行扩展到 118 行，补充升级条件、UI 边界、降级规则、可见输出
+- 补齐 `references/skill_visibility.md`：从 128 行扩展到 310 行，补全日志分层、各任务类型可见性、输出校验脚本
+- 补齐 `references/autonomous_mode.md`：从 34 行扩展到 84 行，补充触发方式、自动决策范围、中断确认、阶段门禁变化
+- 补齐 `references/rule_card_protocol.md`：从 133 行扩展到 225 行，补充快速查找脚本、草案校验、用户询问规范
+- 补齐 `references/stack_profiles.md`：从 22 行扩展到 40 行，补充自动选择规则和使用示例
+- 新增 `scripts/classify_task.sh`：任务预分类脚本，输出 mode/confidence/policy/matched_by
+- 新增 `scripts/check_rule_card.sh`：规则卡快速查找脚本，输出 status/path/project_name
+- 新增 `scripts/validate_output.sh`：输出格式校验，检查 [h5-forge] 标记、模式名、阶段编号、角色名
+- 新增 `scripts/ff_session.sh`：session.md 结构化管理（read/init/update/reset/validate）
+- 新增 `scripts/find_existing_rules.sh`：扫描项目中已有规则文件
+- 修复 .skillhub.json 版本格式：`v0.1.0` → `0.1.1`（JSON 应无 v 前缀）
+- 修复 README 示例阶段名：`需求理解 -> 设计包` → `页面开发`，对齐 SKILL.md 模式名
+- P0/P1 规则补充 h5f-fast/h5f-a 行为约束和决策协议交叉引用
+
 ## v0.1.0
 
 全新 v 前缀发布线，复刻 Flutter Forge 新方案到 H5/Web 技术栈，并补齐规则卡项目隔离。
