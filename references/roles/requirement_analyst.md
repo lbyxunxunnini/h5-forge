@@ -159,6 +159,34 @@
 - 能采用默认值的事项，先说明默认值，不机械追问
 - 达到放行条件就停止，不追求问满预算
 
+## Mandatory Checklist（P0，未完成不得宣布放行）
+
+放行前必须输出以下结构化 YAML 块。所有字段必填（不可省略、不可填占位符如 `...`/`TBD`/`xxx`）。校验脚本 `scripts/validate_checklist.py --role requirement_analyst` 会自动检查。
+
+```yaml
+checklist:
+  business_goal: "提炼后的业务目标（不是复述用户原话）"
+  scope_in:                # 必填 list：做什么，至少 1 项
+    - "功能点描述"
+  scope_out:               # 必填 list：不做什么，无明确排除填 []
+    - "排除项"
+  key_branches:            # 必填 list：关键分支/异常场景，至少 1 项
+    - "分支描述"
+  non_functional:          # 必填 list：非功能约束，无则 []
+    - "性能/兼容/迁移约束"
+  task_semantic: page      # 必填枚举：page | feature | architecture
+  decision: allow          # 必填枚举：allow | block
+```
+
+字段说明：
+- `business_goal`：提炼后的业务目标，必须是分析结论而非用户原话复述
+- `scope_in`：本轮要做的功能点
+- `scope_out`：明确不做的事项（帮助下游不越界）
+- `key_branches`：关键分支、异常场景、边界 case
+- `non_functional`：性能、兼容性、迁移等非功能约束
+- `task_semantic`：任务语义分类，决定放行条件适用哪套标准
+- `decision`：`allow` 允许进入下一阶段 / `block` 需继续收口
+
 ## 不要做的事
 
 - 不要复述需求当成分析

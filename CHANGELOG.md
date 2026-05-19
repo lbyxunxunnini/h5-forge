@@ -5,6 +5,61 @@
 - `v0.1.0` 开启 v 前缀发布线，用于和历史无 `v` 的 `0.x.x` 版本隔离
 - `0.4.x` 及更早版本保留为历史事实；当前现行入口、规则卡路径和发布检查以 `v0.1.0` 后的文档为准
 
+## v0.2.0
+
+全面复刻 Flutter Forge v0.2.2 的成熟机制到 H5/Web 技术栈。核心目标：让 h5-forge 拥有与 flutter-forge 同等质量的工程化保障，同时保留 H5/Web 特有的前端协作 skills 集成。
+
+### 新增文件
+
+- 新增 `references/trigger_words.md`：触发词单一权威来源，包含防误触发硬规则和文档引用规则
+- 新增 `scripts/validate_checklist.py`：角色 checklist YAML 校验脚本，支持 4 个角色（requirement_analyst/ui_designer/architecture_designer/page_engineer）
+- 新增 `scripts/hook_check_rule_card.sh`：preToolCall hook，未初始化项目写操作硬阻断，H5/Web 特化风险 token（package.json/vite.config/webpack.config/store/context/reducer/src/core/src/shared）
+- 新增 `references/phase_checkpoint.md`：阶段转换检查点动作（状态回写→输出校验→阶段日志输出），S2→S4 硬阻断检查清单
+
+### 重写文件
+
+- 重写 `SKILL.md`：全面对齐 flutter-forge P0/P1 规则体系，新增 gate #9（S2→S4 硬阻断）、#10（session 持久化）、#11（写前改动契约），新增首行 controller 输出强制、checklist 校验 P0 规则、trigger_words.md 引用、规则卡缓存和 task gate 集成
+- 重写 `references/task_runtime_prompt.md`：17 步启动序列、脚本路径解析、session 恢复强匹配/弱匹配/反向排除、checklist 校验（P0）、阶段转换自检矩阵、草案静默转正检查、S2 后用户追加输入处理
+- 重写 `references/skill_visibility.md`：P0/P1 执行强制性分级表、增强输出校验（--require-s4/--require-complete）、裸结论拦截、写前改动契约跟踪、中等任务示例
+
+### 更新文件
+
+- 更新 `scripts/check_rule_card.sh`：新增 --cached（300s TTL）、--json、--increment-usage、--reset-usage、--increment-reminder、--reset-reminder、--promote-draft 模式，新增 draft_usage_count/draft_reminder_count 跟踪和 runtime 状态文件管理
+- 更新 `scripts/classify_task.sh`：新增 --project-root/--write-gate 选项，扩展输出字段（should_load_rule_card/rule_card_check/required_phases/upgrade_signals），新增 task_gate.json 写入供 hook 集成，新增等待态和启动握手检测，新增 h5f- 触发词剥离
+- 更新 `scripts/validate_output.sh`：新增 --require-complete/--require-s4 参数，新增阶段全名校验（如 S1 需求确认 不可写 S1 需求分析），新增裸结论拦截，新增写前改动契约跟踪，新增全自动模式检测（h5f-a 豁免契约要求）
+- 更新 `scripts/ff_session.sh`：新增 wait 子命令（--waiting_state/--expected_input/--pending_question/--task_object），新增 session 字段（等待状态/等待输入类型/待确认问题/任务对象/恢复键/最近用户输入）
+- 更新 `references/rule_card_protocol.md`：新增缓存机制节（300s TTL/cache_hit/cache_age）、草案计数与转正节（--increment-usage/--promote-draft）、脚本降级路径解析节
+- 更新 `references/load_map.md`：新增 trigger_words.md、phase_checkpoint.md 和 4 个角色文件的场景→文件映射和反向索引
+
+### 角色 Checklist 强制化
+
+4 个角色文件新增 Mandatory Checklist（P0）YAML 块：
+
+- `references/roles/page_engineer.md`：target_files/changes/freeze_alignment/deviations/regression_scope/verification_type/commands_run
+- `references/roles/requirement_analyst.md`：business_goal/scope_in/scope_out/key_branches/non_functional/task_semantic/decision
+- `references/roles/ui_designer.md`：source/blocks/hierarchy/interactions/missing_inputs/component_ownership/decision
+- `references/roles/architecture_designer.md`：module_layout/state_management/routing/freeze_constraints/reuse_strategy/write_scope/decision
+
+### 关键机制移植
+
+从 Flutter Forge 理解思路后复刻（非简单复制）：
+
+1. **S2→S4 硬阻断**：S2 方案确认完成后必须在下一条回复进入 S4 实现中，不允许在 S2 输出结论后退出
+2. **写前改动契约**：中等及以上非 h5f-a 任务进入写操作前必须输出允许改动/禁止改动/行为不变项/确认状态
+3. **Session 持久化**：每次阶段切换/等待用户输入时通过 ff_session.sh 写入状态，支持上下文压缩后恢复
+4. **规则卡缓存与草案转正**：300s TTL 缓存 + 连续 5 次无冲突使用自动转正
+5. **preToolCall hook 写阻断**：未初始化项目写操作硬阻断，task gate 放行轻量/直通写入
+6. **Checklist 校验**：角色宣布放行前必须输出 YAML checklist 并通过 validate_checklist.py 校验
+7. **输出格式校验增强**：--require-s4 防 S2 掉链、--require-complete 强制完成日志
+8. **触发词单一来源**：trigger_words.md 作为唯一权威清单，其他文档不再维护并列清单
+
+### 适配差异
+
+- 路径前缀：h5-forge 使用 `src/` 而非 `lib/`，`.h5-forge/` 而非 `.flutter-forge/`
+- 风险 token：H5/Web 特化（package.json/vite.config/webpack.config/store/context/reducer）替代 Flutter 特化（pubspec.yaml/provider/bloc/cubit）
+- 角色数量：h5-forge 4 个角色（无 verify_agent），checklist 校验只覆盖 4 个
+- 前端协作 skills：h5-forge 保留原有前端 skills 集成不变
+
 ## v0.1.2
 
 回溯 Flutter Forge v0.1.4 的规则卡初始化链路修复。

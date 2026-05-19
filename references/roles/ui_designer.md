@@ -158,6 +158,34 @@ UI 设计师的确认次数也要受层级约束：
 
 - 具体拆分规则见 [engineering_heuristics.md](../engineering_heuristics.md)
 
+## Mandatory Checklist（P0，未完成不得宣布放行）
+
+放行前必须输出以下结构化 YAML 块。所有字段必填（不可省略、不可填占位符如 `...`/`TBD`/`xxx`）。校验脚本 `scripts/validate_checklist.py --role ui_designer` 会自动检查。
+
+```yaml
+checklist:
+  source: real_visual      # 必填枚举：real_visual | text_description | structural_inference
+  blocks:                  # 必填 list：页面区块拆分，至少 1 项
+    - "区块名称和描述"
+  hierarchy: "信息层级描述（主次、密度、视觉流）"
+  interactions:            # 必填 list：交互边界定义，至少 1 项
+    - "交互描述"
+  missing_inputs:          # 必填 list：待补 UI 输入，无则 []
+    - "缺失的设计信息"
+  component_ownership:     # 必填 list：组件归属判断，至少 1 项
+    - "组件名: 页面私有 / 功能复用 / 通用组件"
+  decision: allow          # 必填枚举：allow | need_ui_input | back_to_requirement
+```
+
+字段说明：
+- `source`：UI 信息来源标注
+- `blocks`：页面区块拆分结果
+- `hierarchy`：信息层级和视觉流描述
+- `interactions`：关键交互边界
+- `missing_inputs`：还需要用户补充的 UI 信息
+- `component_ownership`：每个组件的归属判断（页面私有/功能复用/通用）
+- `decision`：`allow` 允许进入实现 / `need_ui_input` 需补 UI / `back_to_requirement` 需回需求
+
 ## 不要做的事
 
 - 不要只盯像素还原而忽略结构合理性

@@ -38,6 +38,8 @@
 
 ```bash
 scripts/check_rule_card.sh <project_root>
+scripts/check_rule_card.sh <project_root> --cached 300     # 缓存优先（300s TTL）
+scripts/check_rule_card.sh <project_root> --json            # JSON 输出
 ```
 
 输出格式：
@@ -48,13 +50,55 @@ path: <相对路径或 ->
 project_name: <项目名>
 has_draft: true | false
 draft_path: <草案相对路径或 ->
+draft_usage_count: <仅 draft 时>
+draft_reminder_count: <仅 draft 时>
 ```
 
+JSON 模式额外字段：`project_root`、`checked_at`（缓存 TTL 用）。
+`--cached` 模式额外字段：`cache_hit: true`、`cache_age`（缓存年龄秒数）。
+
 - `status: found` → 加载 `path` 指向的正式规则卡
-- `status: draft` → 提示用户确认草案
+- `status: draft` → 加载草案作为 advisory；仅在首次接入、用户询问/确认草案或达到提醒阈值时提示确认
 - `status: not_found` → 进入初始化流程
 
 LLM 禁止自行遍历上述四个路径查找规则卡。路径解析由脚本完成，确保精确匹配项目名且不跨项目污染。
+
+### 缓存机制
+
+`--cached` 模式优先读取 `.h5-forge/runtime/rule_card_status.json` 缓存：
+
+- 缓存命中且未过期（默认 300 秒 TTL）且 `project_root` 匹配 → 直接输出缓存内容
+- 缓存未命中、过期或 `project_root` 不匹配 → 脚本内部自动回退到完整检查
+
+### 草案计数与转正
+
+脚本支持以下扩展操作：
+
+- `--increment-usage`：草案无冲突使用计数 +1（任务完成后无冲突时调用）
+- `--reset-usage`：草案使用计数清零（发现冲突时调用）
+- `--increment-reminder`：草案确认提醒计数 +1
+- `--reset-reminder`：草案确认提醒计数清零（用户确认后调用）
+- `--promote-draft`：将草案转为正式规则卡（`draft_usage_count >= 5` 时自动调用）
+
+转正逻辑：连续 5 次任务无冲突使用后，下次规则卡检查时自动执行 `--promote-draft`，将 `_draft.yaml` 重命名为正式 `.yaml`。
+
+## 脚本降级路径解析
+
+仅在 `scripts/check_rule_card.sh` 不存在或执行失败（非零退出码、超时、缺依赖）时启用降级路径，**正常情况下不允许走降级**。
+
+降级触发时必须：
+
+1. 先输出 `[h5-forge] 主控：规则卡脚本不可用，进入降级路径解析`，保留可观测性
+2. 按下列顺序读取项目根目录下的规则卡，命中第一个存在的即停：
+   - `.claude/.h5-forge/projects/<project>.rule_card.yaml`
+   - `.trae/.h5-forge/projects/<project>.rule_card.yaml`
+   - `.agent/.h5-forge/projects/<project>.rule_card.yaml`
+   - `.h5-forge/projects/<project>.rule_card.yaml`
+3. 同时检查同名 `*.rule_card_draft.yaml` 文件，判定草案状态
+4. 命中规则卡时按 `status: found` 处理；只有草案时按 `status: draft` 处理；都没有时按 `status: not_found` 处理
+5. 全程不跳过规则卡检查环节——降级是路径解析方式的降级，不是检查环节的降级
+
+降级路径解析后，LLM 应在任务收口前提示用户检查脚本环境（如 `bash` 不可用、脚本文件被误删），避免长期降级运行。
 
 ## 规则卡的意义
 

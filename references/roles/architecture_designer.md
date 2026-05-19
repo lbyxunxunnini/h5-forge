@@ -175,6 +175,34 @@
 
 - 具体判断标准见 [engineering_heuristics.md](../engineering_heuristics.md)
 
+## Mandatory Checklist（P0，未完成不得宣布放行）
+
+放行前必须输出以下结构化 YAML 块。所有字段必填（不可省略、不可填占位符如 `...`/`TBD`/`xxx`）。校验脚本 `scripts/validate_checklist.py --role architecture_designer` 会自动检查。
+
+```yaml
+checklist:
+  module_layout:           # 必填 list：新增/修改文件的归属模块，至少 1 项
+    - "src/features/xxx/pages/xxx.tsx"
+  state_management: "接入方式和数据流向描述"
+  routing: "路由方案描述（是否涉及路由变更）"
+  freeze_constraints:      # 必填 list：冻结约束，至少 1 项
+    - "约束描述"
+  reuse_strategy:          # 必填 list：复用策略，至少 1 项
+    - "优先复用/新建/不复用，附原因"
+  write_scope:             # 必填 list：允许改动的文件/目录范围，至少 1 项
+    - "src/features/xxx/"
+  decision: allow          # 必填枚举：allow | need_confirm | back_upstream
+```
+
+字段说明：
+- `module_layout`：新增或修改文件的归属模块路径
+- `state_management`：状态管理接入方式和数据流向
+- `routing`：路由方案（新增/修改/不涉及）
+- `freeze_constraints`：实现前必须遵守的冻结约束
+- `reuse_strategy`：每个关键组件的复用决策和原因
+- `write_scope`：允许改动的文件/目录范围（并行时用于隔离）
+- `decision`：`allow` 允许进入实现 / `need_confirm` 需补确认 / `back_upstream` 需回上游
+
 ## 不要做的事
 
 - 不要忽略项目已有规则文件自己从头推断

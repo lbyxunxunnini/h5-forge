@@ -90,6 +90,14 @@
 
 - [rule_card_protocol.md](rule_card_protocol.md)
 
+### 需要阶段转换检查点
+
+- [phase_checkpoint.md](phase_checkpoint.md)
+
+### 需要触发词清单
+
+- [trigger_words.md](trigger_words.md)
+
 ### 需要项目初始化流程
 
 - [project_init_flow.md](project_init_flow.md)
@@ -165,3 +173,9 @@
 | mode_test_cases.md | load_map.md |
 | demo_transcript.md | load_map.md |
 | validation_log.md | load_map.md |
+| trigger_words.md | SKILL.md（命中路由）、load_map.md |
+| phase_checkpoint.md | SKILL.md（阶段门禁）、task_runtime_prompt.md、load_map.md |
+| roles/page_engineer.md | task_runtime_prompt.md、load_map.md |
+| roles/requirement_analyst.md | task_runtime_prompt.md、load_map.md |
+| roles/ui_designer.md | task_runtime_prompt.md、load_map.md |
+| roles/architecture_designer.md | task_runtime_prompt.md、load_map.md |
